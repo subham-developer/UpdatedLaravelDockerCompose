@@ -20,8 +20,8 @@ define('LARAVEL_START', microtime(true));
 | loading any of our classes later on. It feels great to relax.
 |
 */
-
-require __DIR__.'/../vendor/autoload.php';
+//print_r('/../vendor/autoload.php');
+require_once '../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once '../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +48,17 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+$app->bind('path.public', function() {
+    return __DIR__;
+});
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
+
+
 
 $response->send();
 

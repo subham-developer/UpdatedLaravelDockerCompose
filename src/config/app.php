@@ -1,5 +1,8 @@
 <?php
 
+// echo "hi";
+// exit;
+
 return [
 
     /*
@@ -52,9 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
-
-    'asset_url' => env('ASSET_URL', null),
+    'url' => env('APP_URL', 'http://35.154.140.166/oneinr_laravel/public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +68,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Kolkata',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -94,19 +96,6 @@ return [
     */
 
     'fallback_locale' => 'en',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Faker Locale
-    |--------------------------------------------------------------------------
-    |
-    | This locale will be used by the Faker PHP library when generating fake
-    | data for your database seeds. For example, this will be used to get
-    | localized telephone numbers, street address information and more.
-    |
-    */
-
-    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +150,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,11 +164,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-
-        Mews\Captcha\CaptchaServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class
+        
     ],
 
     /*
@@ -197,7 +184,6 @@ return [
     'aliases' => [
 
         'App' => Illuminate\Support\Facades\App::class,
-        'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
@@ -227,18 +213,83 @@ return [
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
-        'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
-        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
         
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    ],
 
+    'debug_blacklist' => [
+        '_ENV' => [
+            'APP_KEY',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'DB_HOST',
+            'DB_PORT',
+            'DB_CONNECTION',
+            'APP_ENV',
+            'SERVER_ADDR',
+            'REMOTE_ADDR',
+            'REMOTE_PORT',
+            'DOCUMENT_ROOT',
+            'MAIL_DRIVER',
+            'MAIL_HOST',
+            'MAIL_PORT',
+            'MAIL_USERNAME',
+            'MAIL_PASSWORD',
+            'MAIL_ENCRYPTION',
+            'SCRIPT_FILENAME',
+            'SERVER_ADMIN',
+            'CONTEXT_DOCUMENT_ROOT',
+            'SERVER_PORT',
+            'PATH',
+            'HTTP_COOKIE',
+            'UNIQUE_ID',
+            'PHP_SELF',
+            'APP_DEBUG',
+            'REDIS_HOST',
+            'REDIS_PORT',
+        ],
+
+        '_SERVER' => [
+            'APP_KEY',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'DB_HOST',
+            'DB_PORT',
+            'DB_CONNECTION',
+            'APP_ENV',
+            'SERVER_ADDR',
+            'REMOTE_ADDR',
+            'REMOTE_PORT',
+            'DOCUMENT_ROOT',
+            'MAIL_DRIVER',
+            'MAIL_HOST',
+            'MAIL_PORT',
+            'MAIL_USERNAME',
+            'MAIL_PASSWORD',
+            'MAIL_ENCRYPTION',
+            'SCRIPT_FILENAME',
+            'SERVER_ADMIN',
+            'CONTEXT_DOCUMENT_ROOT',
+            'SERVER_PORT',
+            'PATH',
+            'HTTP_COOKIE',
+            'UNIQUE_ID',
+            'PHP_SELF',
+            'APP_DEBUG',
+            'REDIS_HOST',
+            'REDIS_PORT',
+        ],
+
+        '_POST' => [
+            'password',
+        ],
     ],
 
 ];

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,14 +45,38 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path('uploads'),
+            // 'root' => storage_path('app'),
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => public_path('uploads'),
+            'url' => env('APP_URL'),
+            'visibility' => 'public',
+        ],
+        /*'public' => [
+            'driver' => 'public',
+            'root' => public_path('uploads'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],*/
+
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => '13.232.105.79',
+            'username' => 'ec2-user',
+            'root' => public_path('uploads'),
+             'password' => '',
+
+            // Settings for SSH key based authentication...
+            'privateKey' => ' //13.232.105.79/oneinr_new.pem',
+            // 'password' => 'encryption-password',
+
+            // Optional SFTP Settings...
+           // 'port' => 22,
+            // 'root' => '',
+            // 'timeout' => 30,
         ],
 
         's3' => [
@@ -62,10 +86,6 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-        ],
-        'client_export' => [
-            'driver' => 'local',
-            'root' => 'client_export/',
         ],
 
     ],

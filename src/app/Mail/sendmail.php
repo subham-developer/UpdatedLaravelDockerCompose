@@ -10,18 +10,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
- public $data;
- public $attachment;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data,$content,$attachment)
+    public $data;
+    public function __construct($data)
     {
-        $this->subject=$data;
-        $this->content=$content;
-        $this->attachment = $attachment;
+        $this->data = $data;
     }
 
     /**
@@ -31,16 +29,10 @@ class SendMail extends Mailable
      */
     public function build()
     {
-
-        $email = $this->markdown('dynamic_email_template')
-        ->from('info@nimapinfotech.com')
-        ->subject($this->subject)
-        ->with('content', $this->content);
- foreach ($this->attachment as $item) {
-    $email->attach($item);
-}
-return $email;
-
-       // return $this->from('info@nimapinfotech.com')->subject('Client Details')->view('dynamic_email_template')->with('data',$this->data);
+        $emailSubject = isset($this->data['email_subject']) ? $this->data['email_subject'] : "NGO Enquiry";
+        $emailFrom = isset($this->data['email_from']) ? $this->data['email_from'] : "info@oneinr.com";
+        return $this->from($emailFrom)
+                    ->subject($emailSubject)
+                    ->view('emails.'.$this->data['view']);
     }
 }

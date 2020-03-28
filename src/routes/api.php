@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('users','API\UserController');
+Route::post('login','API\UserController@login');
+Route::post('projects/long-description/{id}','API\ProjectController@longDescription');
+
+Route::middleware(['login.verification'])->group(function () {
+	Route::apiResource('projects','API\ProjectController');
+	Route::apiResource('comments','API\CommentController');
+});
+	Route::post('donate','API\DonationController@store');
