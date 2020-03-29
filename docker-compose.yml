@@ -4,16 +4,16 @@ networks:
   laravel:
 
 services:
-  nginx:
+  nginxinrproject:
     image: nginx:stable-alpine
     container_name: nginxinrproject
     ports:
-      - "9993:80"
+      - "8282:80"
     volumes:
       - ./src:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - phpinrproject
+      - php
       - mysqlinrproject
     networks:
       - laravel
@@ -35,7 +35,7 @@ services:
     networks:
       - laravel
 
-  phpinrproject:
+  php:
     build:
       context: .
       dockerfile: Dockerfile
@@ -54,7 +54,7 @@ services:
       - ./src:/var/www/html
     working_dir: /var/www/html
     depends_on:
-      - phpinrproject
+      - php
     networks:
       - laravel
 
